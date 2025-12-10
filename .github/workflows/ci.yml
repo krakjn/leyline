@@ -1,0 +1,29 @@
+on:
+  push:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir -p tier/1 tier/2 tier/3 tier/4 tier/5 tier/6 tier/7 tier/8 tier/9 tier/10
+          echo "one" > tier/1/one.txt
+          echo "two" > tier/2/two.txt
+          echo "three" > tier/3/three.txt
+          echo "four" > tier/4/four.txt
+          echo "five" > tier/5/five.txt
+          echo "six" > tier/6/six.txt
+          echo "seven" > tier/7/seven.txt
+          echo "eight" > tier/8/eight.txt
+          echo "nine" > tier/9/nine.txt
+          echo "ten" > tier/10/ten.txt
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tier
+          merge-multiple: true
+          path: artifacts
+      
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**
