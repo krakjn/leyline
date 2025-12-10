@@ -25,10 +25,8 @@ jobs:
       
       - uses: actions/upload-artifact@v4
         with:
-          name: tier
-          path: artifacts
-          files: |
-            tier/**
+          name: uploads  # name of uploaded set
+          path: tier
       
   release:
     needs: create-artifacts
@@ -36,11 +34,11 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: tier
-          merge-multiple: true
-          path: artifacts
+          name: uploads  # name of uploaded set
+          path: artifacts # path where files will be downloaded
+          merge-multiple: true  # merge divergent paths into a single path
 
       - uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/**
+            artifacts/*
