@@ -37,8 +37,11 @@ jobs:
           name: uploads  # name of uploaded set
           path: artifacts # path where files will be downloaded
           merge-multiple: true  # merge divergent paths into a single path
+      
+      - run: |
+          ls -R artifacts
 
       - uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/*
+            artifacts/**
